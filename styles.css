@@ -1,0 +1,140 @@
+:root {
+  --bg: #f7efe7;
+  --bg-soft: #f2e1d4;
+  --card: rgba(255, 250, 246, 0.82);
+  --text: #45312d;
+  --muted: #7f615c;
+  --line: rgba(111, 78, 72, 0.16);
+  --shadow: 0 24px 80px rgba(87, 55, 45, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.85), transparent 34%),
+    linear-gradient(135deg, var(--bg) 0%, #f4e7df 42%, var(--bg-soft) 100%);
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(6px);
+}
+
+body::before {
+  width: 18rem;
+  height: 18rem;
+  top: -4rem;
+  right: -5rem;
+  background: rgba(214, 166, 150, 0.22);
+}
+
+body::after {
+  width: 14rem;
+  height: 14rem;
+  bottom: -3rem;
+  left: -3rem;
+  background: rgba(196, 145, 115, 0.16);
+}
+
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.card {
+  padding: 3.4rem;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  line-height: 0.92;
+  font-weight: 600;
+}
+
+.lead,
+.text {
+  max-width: 32rem;
+}
+
+.lead {
+  margin: 1.5rem 0 1rem;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.7;
+}
+
+.text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.photo-wrap {
+  min-height: 32rem;
+}
+
+.photo {
+  height: 100%;
+  min-height: 32rem;
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  box-shadow: var(--shadow);
+  background:
+    linear-gradient(rgba(69, 49, 45, 0.12), rgba(69, 49, 45, 0.18)),
+    url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80")
+      center/cover;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem;
+  }
+
+  .card,
+  .photo {
+    border-radius: 28px;
+  }
+
+  .card {
+    padding: 2rem 1.4rem;
+  }
+
+  .photo-wrap,
+  .photo {
+    min-height: 20rem;
+  }
+}
