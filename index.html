@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="sr-Latn">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nemanja i Milana</title>
+    <title>Nemanja i Milana | Svadba</title>
     <meta
       name="description"
-      content="Privremena stranica za svadbu Nemanje i Milane 26.9.2026."
+      content="Informacije o svadbi Nemanje i Milane, 26. septembra 2026."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,22 +17,115 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="hero">
-      <section class="card">
-        <p class="eyebrow">26. septembar 2026.</p>
-        <h1>Nemanja i Milana</h1>
-        <p class="lead">
-          Naša svadbena priča uskoro dobija svoje mesto ovde.
-        </p>
-        <p class="text">
-          Za sada ostavljamo mali znak dobrodošlice, dok pripremamo ceo sajt sa
-          svim detaljima i lepim uspomenama koje dolaze.
-        </p>
+    <main>
+      <section class="hero" aria-labelledby="naslov">
+        <div class="hero-copy">
+          <p class="eyebrow">26. septembar 2026.</p>
+          <h1 id="naslov">Nemanja <span>i</span> Milana</h1>
+          <p class="lead">Radujemo se što ćete naš dan podeliti sa nama.</p>
+
+          <section class="countdown" aria-labelledby="odbrojavanje-naslov">
+            <p id="odbrojavanje-naslov" class="countdown-label">Do početka svadbe</p>
+            <div class="countdown-grid" aria-live="polite">
+              <div class="countdown-unit"><strong id="dani">--</strong><span>dana</span></div>
+              <div class="countdown-unit"><strong id="sati">--</strong><span>sati</span></div>
+              <div class="countdown-unit"><strong id="minuti">--</strong><span>minuta</span></div>
+              <div class="countdown-unit"><strong id="sekunde">--</strong><span>sekundi</span></div>
+            </div>
+            <p id="poruka-odbrojavanja" class="countdown-message" hidden>
+              Danas slavimo ljubav.
+            </p>
+          </section>
+        </div>
+
+        <aside class="photo-wrap" aria-hidden="true">
+          <div class="photo"></div>
+        </aside>
       </section>
 
-      <aside class="photo-wrap" aria-hidden="true">
-        <div class="photo"></div>
-      </aside>
+      <section class="details" aria-label="Informacije o svadbi">
+        <div class="section-heading">
+          <p class="eyebrow">Dan venčanja</p>
+          <h2>Raspored</h2>
+        </div>
+
+        <ol class="timeline">
+          <li>
+            <time datetime="2026-09-26T15:00:00+02:00">15:00</time>
+            <div>
+              <h3>Gradska kuća</h3>
+              <p>Subotica</p>
+            </div>
+          </li>
+          <li>
+            <time datetime="2026-09-26T16:00:00+02:00">16:00</time>
+            <div>
+              <h3>Pravoslavna crkva</h3>
+              <p>Subotica</p>
+            </div>
+          </li>
+          <li>
+            <time datetime="2026-09-26T17:00:00+02:00">17:00</time>
+            <div>
+              <h3>Sophora</h3>
+              <p>Mala Bosna</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="venue" aria-labelledby="mesto-proslave">
+        <div class="venue-copy">
+          <p class="eyebrow">Mesto proslave</p>
+          <h2 id="mesto-proslave">Sophora</h2>
+          <p>Mala Bosna</p>
+          <p class="venue-note">Proslava počinje u 17:00.</p>
+          <a
+            class="map-link"
+            href="https://www.google.com/maps/search/?api=1&query=Sophora%2C%20Mala%20Bosna"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Otvori mapu
+          </a>
+        </div>
+      </section>
     </main>
+
+    <script>
+      const cilj = new Date("2026-09-26T15:00:00+02:00");
+      const polja = {
+        dani: document.getElementById("dani"),
+        sati: document.getElementById("sati"),
+        minuti: document.getElementById("minuti"),
+        sekunde: document.getElementById("sekunde"),
+      };
+      const mrezaOdbrojavanja = document.querySelector(".countdown-grid");
+      const porukaOdbrojavanja = document.getElementById("poruka-odbrojavanja");
+
+      function osveziOdbrojavanje() {
+        const preostalo = cilj.getTime() - Date.now();
+
+        if (preostalo <= 0) {
+          mrezaOdbrojavanja.hidden = true;
+          porukaOdbrojavanja.hidden = false;
+          return;
+        }
+
+        const ukupnoSekundi = Math.floor(preostalo / 1000);
+        const dani = Math.floor(ukupnoSekundi / 86400);
+        const sati = Math.floor((ukupnoSekundi % 86400) / 3600);
+        const minuti = Math.floor((ukupnoSekundi % 3600) / 60);
+        const sekunde = ukupnoSekundi % 60;
+
+        polja.dani.textContent = dani;
+        polja.sati.textContent = String(sati).padStart(2, "0");
+        polja.minuti.textContent = String(minuti).padStart(2, "0");
+        polja.sekunde.textContent = String(sekunde).padStart(2, "0");
+      }
+
+      osveziOdbrojavanje();
+      window.setInterval(osveziOdbrojavanje, 1000);
+    </script>
   </body>
 </html>
